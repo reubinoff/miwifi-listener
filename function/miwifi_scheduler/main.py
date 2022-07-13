@@ -4,7 +4,7 @@ import logging
 import os
 import azure.functions as func
 import json
-from function.scheduler_manager import SchedulerManager, ScheduleRequest
+from function.miwifi_scheduler.scheduler_manager import SchedulerManager, ScheduleRequest
 
 
 

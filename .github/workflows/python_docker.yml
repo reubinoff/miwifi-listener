@@ -34,3 +34,14 @@ jobs:
         docker tag ${{ env.BASE_REPO }}:latest ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:latest
         docker push ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }}
         docker push ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:latest
+        docker logout ${{ env.REGISTRY }}
+
+    - uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    - name: Build And Publish Docker
+      run: |
+        docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.BASE_REPO }}:${{ github.sha }}
+        docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.BASE_REPO }}:latest
+        docker logout ${{ env.REGISTRY }}

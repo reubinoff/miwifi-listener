@@ -35,7 +35,7 @@ jobs:
       shell: bash
       run: |
         pushd './client'
-        ng build --prod
+        npm run build --prod
         popd
 
     - name: 'Login via Azure CLI'

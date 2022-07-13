@@ -42,5 +42,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
     - name: Publish Dockerhub
       run: |
+        cd listener
+        docker-compose build
+        docker tag ${{ env.DOCKERHUB_USERNAME }}:latest ${{ env.DOCKERHUB_USERNAME }}/${{ env.BASE_REPO }}:${{ github.sha }}
+        docker tag ${{ env.DOCKERHUB_USERNAME }}:latest ${{ env.DOCKERHUB_USERNAME }}/${{ env.BASE_REPO }}:latest
         docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.BASE_REPO }}:${{ github.sha }}
         docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.BASE_REPO }}:latest

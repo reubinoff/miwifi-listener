@@ -47,7 +47,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     elif req.method == "GET":
         name = req.params["name"] if "name" in req.params else None
         a = _get_client().get_all(name)
-        return func.HttpResponse(json.dumps({"version": "1.0", "items": a}), mimetype="application/json")
+        return func.HttpResponse(json.dumps({"version": "1.1", "items": a}), mimetype="application/json")
     elif req.method == "PUT":
         a = _get_client().consume_next()
         if a is None:

@@ -1,13 +1,9 @@
 from dataclasses import dataclass
 from functools import lru_cache
 import logging
-import os
 import azure.functions as func
 import json
-from function.miwifi_scheduler.scheduler_manager import SchedulerManager, ScheduleRequest
-
-
-
+from .scheduler_manager import SchedulerManager, ScheduleRequest
 
 
 @lru_cache
@@ -20,9 +16,9 @@ def _validate_body(body: dict) -> bool:
     if "username" not in body:
         raise Exception(  "Please provide a username")
     if "start_time" not in body:
-        raise Exception(  "Please provide a username")
-    if "end_time" not in body:
-        raise Exception(  "Please provide a username")
+        raise Exception(  "Please provide a start_time")
+    if "duration_in_min" not in body:
+        raise Exception(  "Please provide a duration_in_min")
 
     return True
 

@@ -6,7 +6,7 @@ from typing import List, Optional
 import uuid
 import time
 
-from function.miwifi_scheduler.storage.azure_storage import BlobManager
+from .storage.azure_storage import BlobManager
 
 DEVICES = {
     "TV": "TV"

@@ -21,7 +21,7 @@ COPY --chown=$USER:$USER ./pyproject.toml ./poetry.lock* $WORKDIR
 
 RUN poetry install --no-root --no-dev
 
-COPY --chown=$USER:$USER . .
+COPY --chown=$USER:$USER ./src/listener .
 
 # FastApi Configuration
 ENV service_name="listener-service"

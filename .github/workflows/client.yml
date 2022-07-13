@@ -1,0 +1,21 @@
+name: Build angular client
+
+on:
+  push:
+    paths:
+    - 'client/**'
+
+# CONFIGURATION
+# For help, go to 
+
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@master
+    - name: Setup Node.js 8 Environment
+      uses: actions/setup-node@v1
+      with:
+        node-version: 18.3.0

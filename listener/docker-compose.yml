@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  baking-service:
+    build:
+      context: "./"
+      dockerfile: "Dockerfile"
+    image: "reubinoff/scheduler_listener:latest"

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "listener"
+version = "0.1.0"
+description = ""
+authors = ["Moshe Reubinoff <moshe@ownbackup.com>"]
+
+[tool.poetry.dependencies]
+python = "3.9.x"
+fastapi = "^0.78.0"
+fastapi-utils = "^0.2.1"
+uvicorn = "^0.18.2"
+aiohttp = "^3.8.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

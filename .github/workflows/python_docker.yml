@@ -26,7 +26,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Build And Publish Docker
+    - name: Build And Publish Docker azure
       run: |
         cd listener
         docker-compose build
@@ -40,8 +40,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-    - name: Build And Publish Docker
+    - name: Publish Dockerhub
       run: |
         docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.BASE_REPO }}:${{ github.sha }}
         docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.BASE_REPO }}:latest
-        docker logout ${{ env.REGISTRY }}

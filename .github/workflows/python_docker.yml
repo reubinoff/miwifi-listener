@@ -5,7 +5,7 @@ on:
 
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-azure:
     runs-on: ubuntu-latest
     env:
       BASE_REPO: reubinoff/scheduler_listener
@@ -35,6 +35,27 @@ jobs:
         docker push ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }}
         docker push ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:latest
         docker logout ${{ env.REGISTRY }}
+
+    - uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: "{{defaultContext}}:listener"
+        push: true
+        tags: ${{ env.BASE_REPO }}:latest, ${{ env.BASE_REPO }}:${{ github.sha }}
+
+
+  build-and-deploy-dockerhub:
+    runs-on: ubuntu-latest
+    env:
+      BASE_REPO: reubinoff/scheduler_listener
+      REGISTRY: reubinoff.azurecr.io
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@master
 
     - uses: docker/login-action@v1
       with:

@@ -14,7 +14,6 @@ on:
 # 2. Change these variables for your configuration:
 
 env:
-  AZURE_FUNCTIONAPP_NAME: miwifi-scheduler # set this to your application's name
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'function'   # set this to the path to your web app project, defaults to the repository root
   PYTHON_VERSION: '3.9'
 
@@ -41,6 +40,14 @@ jobs:
       uses: Azure/functions-action@v1
       id: fa
       with:
-        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        app-name: miwifi-scheduler
+        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      id: fa
+      with:
+        app-name: miwifi_login
         package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}

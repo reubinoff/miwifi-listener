@@ -1,7 +1,7 @@
 import logging
 
 import azure.functions as func
-
+import json
 
 USERS = [     
     "admin",
@@ -11,4 +11,4 @@ USERS = [
 ]
 def main(req: func.HttpRequest) -> func.HttpResponse:
         # return users list
-        return func.HttpResponse(str(USERS))
+        return func.HttpResponse(json.dumps({"users": USERS}), mimetype="application/json")

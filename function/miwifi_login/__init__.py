@@ -3,7 +3,9 @@ import requests
 import azure.functions as func
 import datetime
 import jwt
+import json
 
+# URL = "http://localhost:7071/api/miwifi_users"
 URL = "https://miwifi-service.azurewebsites.net/api/miwifi_users"
 
 PASS = {
@@ -25,14 +27,15 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     response = requests.get(URL)
     if response.status_code != 200:
         return func.HttpResponse(f"Error: {response.status_code}", status_code=response.status_code)
+    print(response.text)
     users = response.json()
-    if username in users:
+    if username in users["users"]:
         if PASS[username] == password:
             response = {
                 "username": username,
                 "token": get_jwt(username)
             }
-            return func.HttpResponse(response, status_code=200)
+            return func.HttpResponse(json.dumps(response), status_code=200, mimetype="application/json")
         else:
             return func.HttpResponse(f"Wrong password for {username}", status_code=401)
 

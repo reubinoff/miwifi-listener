@@ -14,7 +14,7 @@ app = FastAPI()
 ROUTER_IP = "192.168.31.1"
 ROUTER_PASSWORD = "noayairitamar"
 
-URL = "https://miwifi-service.azurewebsites.net/api/miwifi_scheduler"
+URL = "https://func.listener.reubinoff.com/api/miwifi_scheduler"
 # URL = "http://localhost:7071/api/miwifi_scheduler"
 
 DEVICES = {

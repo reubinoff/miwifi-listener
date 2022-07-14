@@ -17,9 +17,9 @@ SECRET_KEY = "python_jwt"
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger for Login')
     # login for user
-    username = req.params.get('username')
-    password = req.params.get('password')
-
+    #get username from body
+    username = req.get_json()['username']
+    password = req.get_json()['password']
     # get users from service:
     
     response = requests.get(URL)

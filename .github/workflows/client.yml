@@ -3,11 +3,7 @@ name: Build angular client
 on:
   push:
     paths:
-    - '**'
-
-# CONFIGURATION
-# For help, go to 
-
+    - 'client/**'
 
 jobs:
   build-and-deploy:

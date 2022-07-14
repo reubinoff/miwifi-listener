@@ -6,7 +6,7 @@ import jwt
 import json
 
 # URL = "http://localhost:7071/api/miwifi_users"
-URL = "https://miwifi-service.azurewebsites.net/api/miwifi_users"
+URL = "https://func.listener.reubinoff.com/api/miwifi_users"
 
 PASS = {
     "admin": "hello",
@@ -41,8 +41,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
 
 def get_jwt(username):
+    exp = 120 if username == "admin" else 5
     payload = {
         "username": username,
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=5)
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=exp)
     }
     return jwt.encode(payload, SECRET_KEY, algorithm='HS256')

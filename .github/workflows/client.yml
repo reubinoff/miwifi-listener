@@ -12,7 +12,7 @@ jobs:
     env:
       ACCOUNT_NAME: miwifischeduler
       CDN_PROFILE: listener
-      CDN_ENDPOINT: listener
+      CDN_ENDPOINT: listener-website
       RESOURCE_GROUP: miwifiservice
     steps:
     - name: 'Checkout GitHub Action'

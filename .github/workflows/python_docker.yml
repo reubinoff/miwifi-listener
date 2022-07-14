@@ -4,6 +4,7 @@ on:
   push:
     paths:
     - 'listener/**'
+    - '.github/workflows/python_docker.yml'
 
 jobs:
   build-and-deploy-azure:

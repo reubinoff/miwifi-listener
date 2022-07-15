@@ -35,7 +35,7 @@
           name="password"
           [(ngModel)]="form.password"
           required
-          minlength="6"
+          minlength="2"
           #password="ngModel"
           [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
         />

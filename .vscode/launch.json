@@ -2,6 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/client",
+            "preLaunchTask": "npm: start",
+            "cwd": "${workspaceFolder}/client",
+        },
+        
+  
+        {
             "name": "Python: FastAPI",
             "type": "python",
             "request": "launch",

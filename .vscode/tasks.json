@@ -24,6 +24,28 @@
 				"command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r ${workspaceFolder}/function/requirements.txt"
 			},
 			"problemMatcher": []
-		}
+		},
+			{
+				"type": "npm",
+				"script": "start",
+				"options": {
+					"cwd": "${workspaceFolder}/client"
+				},
+				"isBackground": true,
+				"problemMatcher": {
+					"owner": "typescript",
+					"pattern": "$tsc",
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": {
+							"regexp": "(.*?)"
+						},
+						"endsPattern": {
+							"regexp": "bundle generation complete"
+						}
+					}
+				}
+			},
+		
 	]
 }

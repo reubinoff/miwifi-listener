@@ -30,7 +30,7 @@ async def get_next_job():
 
 
 @app.on_event("startup")
-@repeat_every(seconds=2)  # 1 hour
+@repeat_every(seconds=10)  # 1 hour
 async def get_next_job_task() -> None:
     try:
         job = await get_next_job()

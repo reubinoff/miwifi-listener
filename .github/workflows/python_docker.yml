@@ -60,6 +60,7 @@ jobs:
         login-server: ${{ env.REGISTRY }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-    - name: test docker run
-      run: |
-        docker run ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }}
+    - name: docker run
+      run: docker run -d -p 3000:3000 ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }} 
+    - name: curl to container
+      run: curl -s http://localhost:3000/health

@@ -65,3 +65,7 @@ async def add_equest(request: Request):
             if response.status != 200:
                 return "Error"
             return await response.text()
+
+@app.get("/health")
+async def health():
+    return "OK"

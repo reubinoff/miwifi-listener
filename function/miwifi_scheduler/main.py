@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from functools import lru_cache
 import logging
+import traceback
 import azure.functions as func
 import json
 from .scheduler_manager import SchedulerManager, ScheduleRequest
@@ -29,7 +30,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         try:
             _validate_body(body)
         except Exception as e:
-            return func.HttpResponse(status_code=400, body=str(e))
+            full_straceback = traceback.format_exc()
+            status = {
+                "status": "error",
+                "message": str(e),
+                "traceback": full_straceback
+            }
+            return func.HttpResponse(status_code=400, body=json.dumps(status))
         try:
             s = ScheduleRequest.from_dict(body)
             _get_client().add_scheduler(s)

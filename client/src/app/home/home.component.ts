@@ -16,12 +16,12 @@ export class HomeComponent implements OnInit {
   errorMessage = '';
   username: string = '';
   timeSlotsList = [{ name: 15 }, { name: 30 }, { name: 45 }, { name: 60 }];
-  selectedTimeSlot: number = 15;
+  selectedTimeSlot = { name: 15 };
 
   constructor(
     private userService: UserService,
     private storageService: StorageService,
-    private requestService: RequestService,
+    private requestService: RequestService
   ) {}
 
   isLoggedIn = false;
@@ -36,14 +36,12 @@ export class HomeComponent implements OnInit {
     let req = new WifiRequest(
       this.username,
       Math.round(Date.now() / 1000),
-      this.selectedTimeSlot
+      this.selectedTimeSlot.name
     );
     this.requestService.sendRequest(req).subscribe({
-      next: data => {
+      next: (data) => {
         console.log(data);
-      }
+      },
     });
-
-
   }
 }

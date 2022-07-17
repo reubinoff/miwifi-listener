@@ -47,3 +47,19 @@ jobs:
         docker push ${{ env.DOCKERHUB_REGISTRY }}/${{ env.BASE_REPO }}:latest
 
 
+  test-docker:
+    runs-on: ubuntu-latest
+    env:
+      BASE_REPO: reubinoff/scheduler_listener
+      REGISTRY: reubinoff.azurecr.io
+      DOCKERHUB_REGISTRY: docker.io
+    steps: 
+    - name: 'Log in to the Container registry'
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.REGISTRY }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - name: test docker run
+      run: |
+        docker run ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }}

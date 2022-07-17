@@ -21,15 +21,8 @@ COPY --chown=$USER:$USER ./pyproject.toml ./poetry.lock* $WORKDIR
 
 RUN poetry install --no-root --no-dev
 
-COPY --chown=$USER:$USER ./src/listener .
-
-# FastApi Configuration
-ENV service_name="listener-service"
-ENV MODULE_NAME="app"
-ENV VARIABLE_NAME="app"
-ENV WORKERS_PER_CORE=1
-ENV MAX_WORKERS=1
+COPY --chown=$USER:$USER ./src/listener $WORKDIR
 
 RUN apt-get clean && apt-get autoclean
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["poetry","run", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]

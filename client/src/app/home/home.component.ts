@@ -1,50 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../_services/storage.service';
 import { UserService } from '../_services/user.service';
+import { WifiRequest } from '../_models/WifiRequest.model';
+import { RequestService } from '../_services/requests.service';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
   users: string[] = [];
-  selectedUser: string = "";
+  selectedUser: string = '';
   errorMessage = '';
-  username: string = "";
+  username: string = '';
+  timeSlotsList = [{ name: 15 }, { name: 30 }, { name: 45 }, { name: 60 }];
+  selectedTimeSlot: number = 15;
 
-  form: any = {
-    username: null,
-    duration: null
-  };
-  constructor(private userService: UserService, private storageService: StorageService) { }
+  constructor(
+    private userService: UserService,
+    private storageService: StorageService,
+    private requestService: RequestService,
+  ) {}
 
-
+  isLoggedIn = false;
 
   ngOnInit(): void {
     this.username = this.storageService.getUser().username;
-    this.form.username = this.username;
-
-   
+    console.log(this.username);
+    this.isLoggedIn = this.storageService.isLoggedIn();
   }
 
-    onSubmit(): void {
-    const { username, password } = this.form;
+  onSubmit(): void {
+    let req = new WifiRequest(
+      this.username,
+      Math.round(Date.now() / 1000),
+      this.selectedTimeSlot
+    );
+    this.requestService.sendRequest(req).subscribe({
+      next: data => {
+        console.log(data);
+      }
+    });
 
-    // this.authService.login(username, password).subscribe({
-    //   next: data => {
-    //     this.storageService.saveUser(data);
-    //     console.log(data);
-    //     this.isLoginFailed = false;
-    //     this.isLoggedIn = true;
-    //     this.username = this.storageService.getUser().username;
-    //     this.reloadPage();
-    //   },
-    //   error: err => {
-    //     this.errorMessage = err.error.message;
-    //     this.isLoginFailed = true;
-    //   }
-    // });
+
   }
 }

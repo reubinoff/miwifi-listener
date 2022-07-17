@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../_services/storage.service';
 import { UserService } from '../_services/user.service';
 import { RequestService } from '../_services/requests.service';
+import { WifiRequest } from '../_models/wifirequest.model';
 
 
 @Component({

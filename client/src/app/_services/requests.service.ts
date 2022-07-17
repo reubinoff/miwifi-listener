@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { WifiRequest } from '../_models/wifirequest.model';
 
 
 const API_URL = 'https://func.listener.reubinoff.com/api/miwifi_scheduler';

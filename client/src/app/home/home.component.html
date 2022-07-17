@@ -1,5 +1,5 @@
 
-<div class="col-md-6">
+<div class="col-md-6" *ngIf="isLoggedIn">
   <h5>Time request</h5>
   <h3>Hello {{username}}</h3>
   <p-dropdown [options]="timeSlotsList" [(ngModel)]="selectedTimeSlot" optionLabel="name"></p-dropdown>

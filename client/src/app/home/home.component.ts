@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../_services/storage.service';
 import { UserService } from '../_services/user.service';
-import { WifiRequest } from '../_models/WifiRequest.model';
 import { RequestService } from '../_services/requests.service';
 
 

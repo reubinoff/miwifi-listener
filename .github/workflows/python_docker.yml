@@ -47,23 +47,23 @@ jobs:
         docker push ${{ env.DOCKERHUB_REGISTRY }}/${{ env.BASE_REPO }}:latest
 
 
-  test-docker:
-    runs-on: ubuntu-latest
-    env:
-      BASE_REPO: reubinoff/scheduler_listener
-      REGISTRY: reubinoff.azurecr.io
-      DOCKERHUB_REGISTRY: docker.io
-    steps: 
-    - name: 'Log in to the Container registry'
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ env.REGISTRY }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-    - name: pull image
-      run: |
-        docker pull ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }}
-    - name: docker run
-      run: docker run -d -p 3000:3000 ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }} 
-    - name: curl to container
-      run: curl -s http://localhost:3000/health
+  # test-docker:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     BASE_REPO: reubinoff/scheduler_listener
+  #     REGISTRY: reubinoff.azurecr.io
+  #     DOCKERHUB_REGISTRY: docker.io
+  #   steps: 
+  #   - name: 'Log in to the Container registry'
+  #     uses: azure/docker-login@v1
+  #     with:
+  #       login-server: ${{ env.REGISTRY }}
+  #       username: ${{ secrets.REGISTRY_USERNAME }}
+  #       password: ${{ secrets.REGISTRY_PASSWORD }}
+  #   - name: pull image
+  #     run: |
+  #       docker pull ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }}
+  #   - name: docker run
+  #     run: docker run -d -p 3000:3000 ${{ env.REGISTRY }}/${{ env.BASE_REPO }}:${{ github.sha }} 
+  #   - name: curl to container
+  #     run: curl -s http://localhost:3000/health

@@ -42,7 +42,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             _get_client().add_scheduler(s)
             return func.HttpResponse(f"schedule added for {s.username}")
         except Exception as e:
-            return func.HttpResponse(status_code=400, body=str(e))
+            full_straceback = traceback.format_exc()
+            status = {
+                "status": "error",
+                "message": str(e),
+                "traceback": full_straceback
+            }
+            return func.HttpResponse(status_code=400, body=json.dumps(status))
     elif req.method == "DELETE":
         body = req.get_json()
         _get_client().drop_all()

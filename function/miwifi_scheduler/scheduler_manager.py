@@ -1,5 +1,6 @@
 import logging
 from dataclasses import dataclass, asdict
+import math
 import threading
 import datetime
 from typing import List, Optional
@@ -111,7 +112,7 @@ class SchedulerManager:
     def add_scheduler(self, scheduler:ScheduleRequest) -> bool:
         
         
-        if scheduler.start_time < (time.time() - THRESHOLD_TIME_IN_SECONDS):
+        if scheduler.start_time < (math.floor(time.time()) - THRESHOLD_TIME_IN_SECONDS):
             raise Exception("Start time is in the past")
   
         if scheduler.request_date != get_current_time_in_req_tz(scheduler).date():
